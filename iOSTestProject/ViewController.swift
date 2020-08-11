@@ -31,23 +31,15 @@ class ViewController: UIViewController {
     
     var userEvent: UserEvent?
     var accountDetails: [AccountDetails]?
-    let transition = PopAnimator()
+    var selectedCell: CollectionViewCell?
+    var selectedCellImageViewSnapshot: UIView?
+    var animator: PopAnimator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
         self.parseData()
-        
-        transition.dismissCompletion = { [weak self] in
-          guard
-            let selectedIndexPathCell = self?.collectionView.indexPathsForSelectedItems?.first,
-            let selectedCell = self?.collectionView.cellForItem(at: selectedIndexPathCell)
-              as? CollectionViewCell
-            else {
-              return
-          }
-//          selectedCell.shadowView.isHidden = false
-        }
+
         // Do any additional setup after loading the view.
     }
     
@@ -83,7 +75,6 @@ class ViewController: UIViewController {
         
         self.buttonsContainerView.layoutIfNeeded()
         self.buttonsContainerView.layer.cornerRadius = 30
-        
         
         self.groceryView.amountLabel.text = "$653"
         self.groceryView.nameLabel.text = "Groceries"
@@ -174,19 +165,29 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDataSource,UI
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DetailsViewController") as! DetailsViewController
-        switch indexPath.row {
-        case 0:
-            viewController.details = self.accountDetails?[indexPath.row].allAccount
-        case 1:
-            viewController.details = self.accountDetails?[indexPath.row].westpac
-        case 2:
-            viewController.details = self.accountDetails?[indexPath.row].commbank
-        default:
-            viewController.details = self.accountDetails?[indexPath.row].allAccount
+        
+        selectedCell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell
+        selectedCellImageViewSnapshot = selectedCell?.backgroundImageView.snapshotView(afterScreenUpdates: false)
+        if indexPath.row != 2 {
+            presentSecondViewController(aIndexPth: indexPath)
         }
-        viewController.transitioningDelegate = self
-        self.navigationController?.present(viewController, animated: true, completion: nil)
+    }
+    
+    func presentSecondViewController(aIndexPth: IndexPath) {
+        let secondViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        secondViewController.transitioningDelegate = self
+        switch aIndexPth.row {
+        case 0:
+            secondViewController.details = accountDetails?[aIndexPth.row].allAccount
+            secondViewController.accountType = .allAccount
+        case 1:
+            secondViewController.details = accountDetails?[aIndexPth.row].westpac
+            secondViewController.accountType = .westpac
+        default:
+            secondViewController.details = accountDetails?[aIndexPth.row].westpac
+        }
+        secondViewController.modalPresentationStyle = .fullScreen
+        present(secondViewController, animated: true)
     }
 }
 
@@ -203,52 +204,25 @@ extension UIView{
     }
 }
 
-//extension ViewController: UserEventProtocol{
-//
-////    func updateUserEvent(aTitle: String) {
-////        UIView.animate(withDuration: 0.6, delay: 0.0, options: .curveLinear, animations: {
-////        }) { (finished) in
-////            self.headerLabel.text = aTitle
-////            self.backButton.isHidden = false
-////            self.userEvent = .expand
-////            self.collectionViewHeightConstraint.constant = 220 * 3
-////            self.collectionView.reloadData()
-////            self.collectionView.isScrollEnabled = false
-////        }
-////    }
-//}
 
 extension ViewController: UIViewControllerTransitioningDelegate {
-    func animationController(
-      forPresented presented: UIViewController,
-      presenting: UIViewController, source: UIViewController)
-        -> UIViewControllerAnimatedTransitioning? {
-            guard
-                let selectedIndexPathCell = collectionView.indexPathsForSelectedItems?.first,
-                let selectedCell = collectionView.cellForItem(at: selectedIndexPathCell) as? CollectionViewCell,
-              let selectedCellSuperview = selectedCell.superview
-              else {
-                return nil
-            }
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let firstViewController = presenting as? ViewController,
+            let secondViewController = presented as? DetailsViewController,
+            let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot
+        else { return nil }
 
-            transition.originFrame = selectedCellSuperview.convert(selectedCell.frame, to: nil)
-            transition.originFrame = CGRect(
-              x: transition.originFrame.origin.x + 20,
-              y: transition.originFrame.origin.y + 20,
-              width: transition.originFrame.size.width - 40,
-              height: transition.originFrame.size.height - 40
-            )
-
-            transition.presenting = true
-//            selectedCell.shadowView.isHidden = true
-            
-            return transition
+        animator = PopAnimator(type: .present, firstViewController: firstViewController, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
+        return animator
     }
-    
-    func animationController(forDismissed dismissed: UIViewController)
-        -> UIViewControllerAnimatedTransitioning? {
-      transition.presenting = false
-      return transition
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let secondViewController = dismissed as? DetailsViewController,
+            let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot
+        else { return nil }
+
+        animator = PopAnimator(type: .dismiss, firstViewController: self, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
+        return animator
     }
 }
 

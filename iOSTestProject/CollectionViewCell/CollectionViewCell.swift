@@ -120,56 +120,5 @@ class CollectionViewCell: UICollectionViewCell {
             print("default")
         }
     }
-    
-//    func setupUI(){
-//        self.tableView.delegate = self
-//        self.tableView.dataSource = self
-//
-//        self.tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "tableViewCell")
-//    }
 }
 
-////MARK: Tableview delegate and datasource
-//extension CollectionViewCell: UITableViewDelegate,UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if self.userEvent == UserEvent.collapse{
-//            return 1
-//        }else{
-//            return details?.count ?? 0
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 220
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = self.tableView.dequeueReusableCell(withIdentifier: "tableViewCell") as! TableViewCell
-//        cell.nameLabel.text = details?[indexPath.row].title
-//        cell.amountLabel.text = details?[indexPath.row].balance
-//        cell.spentAmount.text = details?[indexPath.row].spentAmount
-//        cell.incomeAmount.text = details?[indexPath.row].incomeAmount
-//
-//        if details?[indexPath.row].time == ""{
-//            cell.refreshImageView.isHidden = true
-//        }else{
-//            cell.refreshImageView.isHidden = false
-//        }
-//        cell.timeLabel.text = details?[indexPath.row].time
-//        if let type = self.accountType{
-//            cell.setupUI(aAccountType: type, aDetails: details?[indexPath.row])
-//        }
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        switch self.userEvent {
-//        case .expand:
-//            print("expande")
-//        case .collapse:
-//            self.delegate?.updateUserEvent(aTitle: details?[indexPath.row].title ?? "")
-//        default:
-//            print("default")
-//        }
-//    }
-//}

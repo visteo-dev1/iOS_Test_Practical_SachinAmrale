@@ -11,6 +11,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
     // MARK: View Outlets
 
+    @IBOutlet weak var saperatorView: UIView!
     @IBOutlet weak var progressViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var containerView: UIView!
     @IBOutlet var nameLabel: UILabel!
@@ -32,19 +33,18 @@ class TableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        incomeProgressView.layer.cornerRadius = 5
+        incomeProgressView.clipsToBounds = true
+        spentProgressView.layer.cornerRadius = 5
+        spentProgressView.clipsToBounds = true
+        
+        self.spentView.layer.cornerRadius = self.spentView.bounds.width / 2
+        self.spentView.clipsToBounds = true
+        self.incomeView.layer.cornerRadius = self.incomeView.bounds.width / 2
+        self.incomeView.clipsToBounds = true
         // Initialization code
     }
     
-    override func layoutSubviews() {
-        if let type = self.accountType{
-            if type == .allAccount{
-                let topColor = hexStringToUIColor(hex: "#0385C2")
-                let bottomColor = hexStringToUIColor(hex: "#023591")
-                containerView.layoutSubviews()
-//                containerView.addLayerGradientHorizontal(aTopColor: bottomColor.cgColor, aBottomColor: topColor.cgColor)
-            }
-        }
-    }
 
     func setupUI(aAccountType: AccountType,aDetails: Details?) {
         self.accountType = aAccountType
@@ -54,10 +54,7 @@ class TableViewCell: UITableViewCell {
         let incomeValue = Float(self.details?.incomeAmount?.replacingOccurrences(of: "$", with: "") ?? "0")!
         self.incomeProgressView.progress = incomeValue
         self.progressViewWidthConstraint.constant = self.incomeProgressView.bounds.width * CGFloat((spentValue / incomeValue))
-        incomeProgressView.layer.cornerRadius = 5
-        incomeProgressView.clipsToBounds = true
-        spentProgressView.layer.cornerRadius = 5
-        spentProgressView.clipsToBounds = true
+        
         switch aAccountType {
         case .allAccount:
             imageWidthConstraint.constant = 0
@@ -69,10 +66,15 @@ class TableViewCell: UITableViewCell {
             timeLabel.textColor = UIColor.white
             balanceLabel.textColor = UIColor.white
         case .westpac:
-            imageWidthConstraint.constant = 20
-            imageView?.isHidden = false
-            imageView?.image = UIImage(named: "westpacImage")
-            imageView?.clipsToBounds = true
+            if aDetails?.title == "Westpac"{
+                imageWidthConstraint.constant = 20
+                accountImageView?.isHidden = false
+                accountImageView?.image = UIImage(named: "westpacImage")
+            }else{
+                imageWidthConstraint.constant = 0
+                imageView?.isHidden = true
+            }
+            accountImageView?.clipsToBounds = true
             containerView.backgroundColor = .white
             nameLabel.textColor = UIColor.black
             amountLabel.textColor = UIColor.black
@@ -82,9 +84,9 @@ class TableViewCell: UITableViewCell {
             balanceLabel.textColor = UIColor.black
         case .commbank:
             imageWidthConstraint.constant = 20
-            imageView?.isHidden = false
-            imageView?.image = UIImage(named: "commbankImage")
-            imageView?.clipsToBounds = true
+            accountImageView?.isHidden = false
+            accountImageView?.image = UIImage(named: "commbankImage")
+            accountImageView?.clipsToBounds = true
             containerView.backgroundColor = .white
             nameLabel.textColor = UIColor.black
             amountLabel.textColor = UIColor.black

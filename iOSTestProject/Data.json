@@ -1,0 +1,48 @@
+{
+    "data" : [{"All accounts" : [{
+        "title" : "All accounts",
+        "availabel_balance" : "$1,551",
+        "spent_amount" : "$1450",
+        "income_amount" : "$3001",
+        "time" : ""
+        },{
+        "title" : "Westpac",
+        "availabel_balance" : "$445",
+        "spent_amount" : "$605",
+        "income_amount" : "$1050",
+        "time" : "4hrs ago"
+        },{
+        "title" : "Commbank",
+        "availabel_balance" : "$149",
+        "spent_amount" : "$0",
+        "income_amount" : "$149",
+        "time" : "Just now"
+        }]},
+        {"Westpac" : [{
+        "title" : "Westpac",
+        "availabel_balance" : "$445",
+        "spent_amount" : "$605",
+        "income_amount" : "$1050",
+        "time" : "4hrs ago"
+        },{
+        "title" : "Choice",
+        "availabel_balance" : "$312",
+        "spent_amount" : "$12",
+        "income_amount" : "$300",
+        "time" : ""
+        },{
+        "title" : "Savings",
+        "availabel_balance" : "$133",
+        "spent_amount" : "$11",
+        "income_amount" : "$112",
+        "time" : ""
+        }]},
+        {"Commbank" :[{
+        "title" : "Commbank",
+        "availabel_balance" : "$149",
+        "spent_amount" : "$0",
+        "income_amount" : "$149",
+        "time" : "Just now"
+        }]}
+    ]
+}

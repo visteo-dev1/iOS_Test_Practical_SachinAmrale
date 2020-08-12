@@ -99,7 +99,7 @@ class ViewController: UIViewController {
         if let layout = collectionView.collectionViewLayout as? MMBannerLayout {
             layout.itemSpace = 15
 //            layout.itemSize = collectionView.frame.insetBy(dx: 0, dy: 0).size
-             layout.itemSize = CGSize(width: collectionView.frame.width - 10, height: collectionView.frame.height)  //
+             layout.itemSize = CGSize(width: collectionView.frame.width + 15, height: collectionView.frame.height)  //
             layout.minimuAlpha = 1
         }
         

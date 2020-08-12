@@ -1,16 +1,20 @@
 PODS:
+  - AdvancedPageControl (0.1.4)
   - MMBannerLayout (5.0.8)
 
 DEPENDENCIES:
+  - AdvancedPageControl
   - MMBannerLayout
 
 SPEC REPOS:
   trunk:
+    - AdvancedPageControl
     - MMBannerLayout
 
 SPEC CHECKSUMS:
+  AdvancedPageControl: 2bb63992260869ef665e47da39001a432fb48c49
   MMBannerLayout: edc9bcf9826e066c482cb739d52d875eb406b199
 
-PODFILE CHECKSUM: 024c047c818f3d183ef3fe468827b5d3d249d427
+PODFILE CHECKSUM: b3c7b3157ff2823d38624eb9daa1b839d2437c07
 
 COCOAPODS: 1.9.3

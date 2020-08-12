@@ -83,23 +83,30 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="230" id="1k1-aS-hDp"/>
                                         </constraints>
-                                        <collectionViewLayout key="collectionViewLayout" id="7rc-wI-dHi" customClass="MMBannerLayout" customModule="MMBannerLayout"/>
+                                        <collectionViewLayout key="collectionViewLayout" id="vId-Ue-Nai" customClass="MMBannerLayout" customModule="MMBannerLayout"/>
                                         <cells/>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GnB-Un-RNS" customClass="AdvancedPageControlView" customModule="AdvancedPageControl">
+                                        <rect key="frame" x="0.0" y="353" width="320" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="f4N-My-3eh"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Money spent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRj-8E-e4z">
-                                        <rect key="frame" x="15" y="383" width="112" height="21.5"/>
+                                        <rect key="frame" x="15" y="403" width="112" height="21.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View all" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzH-0H-r5T">
-                                        <rect key="frame" x="254" y="383" width="51" height="17"/>
+                                        <rect key="frame" x="254" y="403" width="51" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="textColor" red="0.17254901960784313" green="0.70588235294117641" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwm-vk-h8l">
-                                        <rect key="frame" x="15" y="424.5" width="290" height="125"/>
+                                        <rect key="frame" x="15" y="444.5" width="290" height="125"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lYe-0u-feI">
                                                 <rect key="frame" x="0.0" y="0.0" width="290" height="125"/>
@@ -184,18 +191,21 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="rzH-0H-r5T" secondAttribute="trailing" constant="15" id="1vx-PV-YQ5"/>
+                                    <constraint firstItem="GnB-Un-RNS" firstAttribute="leading" secondItem="zSQ-0d-s9o" secondAttribute="leading" id="2XL-Sw-Kc3"/>
                                     <constraint firstItem="syU-Db-igy" firstAttribute="leading" secondItem="zSQ-0d-s9o" secondAttribute="leading" id="3Rv-cL-ecR"/>
+                                    <constraint firstAttribute="trailing" secondItem="GnB-Un-RNS" secondAttribute="trailing" id="9Al-pH-ejj"/>
                                     <constraint firstItem="tRw-zy-0kS" firstAttribute="centerX" secondItem="zSQ-0d-s9o" secondAttribute="centerX" id="B1u-Uc-PQg"/>
                                     <constraint firstItem="hwf-a9-lF8" firstAttribute="top" secondItem="syU-Db-igy" secondAttribute="bottom" constant="15" id="EHw-x4-s9b"/>
                                     <constraint firstAttribute="trailing" secondItem="xwm-vk-h8l" secondAttribute="trailing" constant="15" id="RGw-1U-aVD"/>
                                     <constraint firstItem="hwf-a9-lF8" firstAttribute="leading" secondItem="zSQ-0d-s9o" secondAttribute="leading" id="Rfd-Z0-kEB"/>
                                     <constraint firstAttribute="trailing" secondItem="hwf-a9-lF8" secondAttribute="trailing" id="Yo4-8Q-LpI"/>
-                                    <constraint firstItem="NRj-8E-e4z" firstAttribute="top" secondItem="hwf-a9-lF8" secondAttribute="bottom" constant="40" id="Z0d-Tc-SSW"/>
                                     <constraint firstAttribute="bottom" secondItem="tRw-zy-0kS" secondAttribute="bottom" constant="50" id="Z5r-e9-HqL"/>
                                     <constraint firstItem="NRj-8E-e4z" firstAttribute="leading" secondItem="zSQ-0d-s9o" secondAttribute="leading" constant="15" id="cX1-3q-Gsg"/>
                                     <constraint firstItem="rzH-0H-r5T" firstAttribute="top" secondItem="NRj-8E-e4z" secondAttribute="top" id="jTK-kZ-dFN"/>
+                                    <constraint firstItem="GnB-Un-RNS" firstAttribute="top" secondItem="hwf-a9-lF8" secondAttribute="bottom" constant="10" id="kfT-ZD-IPJ"/>
                                     <constraint firstAttribute="trailing" secondItem="syU-Db-igy" secondAttribute="trailing" id="qEs-zz-0Oc"/>
                                     <constraint firstItem="xwm-vk-h8l" firstAttribute="top" secondItem="NRj-8E-e4z" secondAttribute="bottom" constant="20" id="yir-wF-Lkb"/>
+                                    <constraint firstItem="NRj-8E-e4z" firstAttribute="top" secondItem="GnB-Un-RNS" secondAttribute="bottom" constant="20" id="z8c-g5-jsJ"/>
                                     <constraint firstItem="tRw-zy-0kS" firstAttribute="width" secondItem="zSQ-0d-s9o" secondAttribute="width" multiplier="220:320" id="zLK-wk-5L3"/>
                                     <constraint firstItem="xwm-vk-h8l" firstAttribute="leading" secondItem="zSQ-0d-s9o" secondAttribute="leading" constant="15" id="zUm-VZ-TKK"/>
                                 </constraints>
@@ -225,6 +235,7 @@
                         <outlet property="headerLabel" destination="HCB-I4-d84" id="dhZ-qg-yrZ"/>
                         <outlet property="housholdView" destination="lEr-8K-hMT" id="icl-it-m7P"/>
                         <outlet property="navigationView" destination="syU-Db-igy" id="j6U-FT-RTh"/>
+                        <outlet property="pageController" destination="GnB-Un-RNS" id="lvX-LL-sgT"/>
                         <outlet property="restuarantView" destination="e3X-1P-fwE" id="NSR-6D-Dxh"/>
                         <outlet property="stackContainerView" destination="xwm-vk-h8l" id="1CT-aB-hV2"/>
                         <outlet property="stackView" destination="lYe-0u-feI" id="bFY-aA-AOq"/>

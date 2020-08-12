@@ -50,9 +50,13 @@ class TableViewCell: UITableViewCell {
         self.accountType = aAccountType
         self.details = aDetails
         let spentValue = Float(self.details?.spentAmount?.replacingOccurrences(of: "$", with: "") ?? "0")!
-        self.spentProgressView.progress = spentValue
+        UIView.animate(withDuration: 2.0) {
+            self.spentProgressView.setProgress(spentValue, animated: true)
+        }
         let incomeValue = Float(self.details?.incomeAmount?.replacingOccurrences(of: "$", with: "") ?? "0")!
-        self.incomeProgressView.progress = incomeValue
+        UIView.animate(withDuration: 2.0) {
+            self.incomeProgressView.setProgress(incomeValue, animated: true)
+        }
         self.progressViewWidthConstraint.constant = self.incomeProgressView.bounds.width * CGFloat((spentValue / incomeValue))
         
         switch aAccountType {

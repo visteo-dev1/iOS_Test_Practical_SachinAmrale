@@ -8,6 +8,7 @@
 
 import UIKit
 import MMBannerLayout
+import AdvancedPageControl
 
 class ViewController: UIViewController {
 
@@ -23,6 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var pageController: AdvancedPageControlView!
     @IBOutlet weak var housholdView: MoneySpentView!
     @IBOutlet weak var restuarantView: MoneySpentView!
     @IBOutlet weak var groceryView: MoneySpentView!
@@ -57,6 +59,7 @@ class ViewController: UIViewController {
             }
         }
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.userEvent = .collapse
@@ -101,6 +104,9 @@ class ViewController: UIViewController {
         }
         
         self.collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "collectionCell")
+        
+        pageController.drawer = ExtendedDotDrawer(numberOfPages: 3, space: 8, raduis: 16, height: 8, width: 8, currentItem: 0, dotsColor: .lightGray, isBordered: false, borderColor: .clear, borderWidth: 0)
+        pageController.numberOfPages = 3
 
     }
     
@@ -189,6 +195,13 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDataSource,UI
         secondViewController.modalPresentationStyle = .fullScreen
         present(secondViewController, animated: true)
     }
+    
+    //MARK: ScrollView Delegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSet = scrollView.contentOffset.x
+        let width = scrollView.frame.width
+        pageController.setCurrentItem(offset: CGFloat(offSet),width: CGFloat(width))
+    }
 }
 
 extension UIView{
@@ -225,4 +238,5 @@ extension ViewController: UIViewControllerTransitioningDelegate {
         return animator
     }
 }
+
 
